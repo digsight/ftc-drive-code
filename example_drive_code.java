@@ -30,12 +30,12 @@ public class example_drive_code extends LinearOpMode {
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        // Make motors brake
         frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        //Initialize IMU
         imu = hardwareMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(
                 new RevHubOrientationOnRobot(
@@ -45,13 +45,13 @@ public class example_drive_code extends LinearOpMode {
         );
         imu.initialize(parameters);
 
-        String driveType = "robot";
+        String driveType = "robot";//defalt drive type
 
         waitForStart();
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
-            double y = -gamepad1.left_stick_y; // Typically inverted for intuitive controls
+            double y = -gamepad1.left_stick_y;
             double x = gamepad1.left_stick_x * 1.1;
             double rx = gamepad1.right_stick_x;
 
@@ -100,8 +100,7 @@ public class example_drive_code extends LinearOpMode {
         }
     }
 
-    // Helper method to set motor powers
-    private void setMotorPowers(double frontLeftPower, double backLeftPower, double frontRightPower, double backRightPower) {
+private void setMotorPowers(double frontLeftPower, double backLeftPower, double frontRightPower, double backRightPower) {
         frontLeftMotor.setPower(frontLeftPower);
         backLeftMotor.setPower(backLeftPower);
         frontRightMotor.setPower(frontRightPower);
